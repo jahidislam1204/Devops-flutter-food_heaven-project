@@ -25,8 +25,9 @@ jobs:
     - name: Analyze code
       run: flutter analyze || true
 
-    - name: Run tests || true
-      run: flutter test 
+    - name: Run tests
+      run: flutter test || true
+ 
 
     - name: Build Web (optional)
       run: flutter build web
