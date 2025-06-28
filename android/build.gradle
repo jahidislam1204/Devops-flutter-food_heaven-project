@@ -1,31 +1,30 @@
-buildscript {
-    ext.kotlin_version = '1.7.10'
-    repositories {
-        google()
-        mavenCentral()
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'dev.flutter.flutter-gradle-plugin'
+}
+
+android {
+    compileSdkVersion 34
+
+    defaultConfig {
+        applicationId "com.yourdomain.foodheaven" // Change this
+        minSdkVersion 21
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0"
     }
 
-    dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    buildTypes {
+        release {
+            // Configure signing config if needed or leave default
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
-rootProject.buildDir = '../build'
-subprojects {
-    project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
-    project.evaluationDependsOn(':app')
-}
-
-tasks.register("clean", Delete) {
-    delete rootProject.buildDir
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.22"
+    // add other dependencies here
 }
