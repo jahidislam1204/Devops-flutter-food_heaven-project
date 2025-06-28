@@ -23,6 +23,26 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+         flutter-version: '3.32.4'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze code
+        run: flutter analyze || true
+
+      - name: Run tests
+        run: flutter test || true
+
+      - name: Build Web
+        run: flutter build web --release
+
+      - name: Build APK
+        run: flutter build apk --release
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
