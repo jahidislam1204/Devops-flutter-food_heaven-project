@@ -28,6 +28,9 @@ jobs:
         with:
          flutter-version: '3.32.4'
 
+      - name: Clean Flutter project
+        run: flutter clean && rm -rf android/.gradle
+
       - name: Install dependencies
         run: flutter pub get
 
