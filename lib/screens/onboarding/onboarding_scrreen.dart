@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
 import '../../constants.dart';
 
 import '../../components/dot_indicators.dart';
@@ -17,35 +14,6 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   int currentPage = 0;
-
-  // The registerUser function to call your backend API
-  Future<void> registerUser(String fullName, String email, String phone, String password) async {
-    final url = Uri.parse('http://<your-ec2-ip>:5000/api/register'); // Replace with your backend IP/domain
-
-    final response = await http.post(
-      url,
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode({
-        'full_name': fullName,
-        'email': email,
-        'phone': phone,
-        'password': password,
-      }),
-    );
-
-    if (response.statusCode == 201) {
-      print('Registration successful!');
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Registration successful!')),
-      );
-    } else {
-      print('Failed to register user: ${response.body}');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to register user: ${response.body}')),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,8 +46,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
             const Spacer(flex: 2),
-
-            // Existing Get Started Button
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
               child: ElevatedButton(
@@ -94,28 +60,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: Text("Get Started".toUpperCase()),
               ),
             ),
-
-            const SizedBox(height: 12),
-
-            // New Register User Test Button
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-              child: ElevatedButton(
-                onPressed: () {
-                  registerUser(
-                    'Jahid Islam',
-                    'jahid@example.com',
-                    '01712345678',
-                    'yourpassword',
-                  );
-                },
-                child: const Text('Register User (Test)'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                ),
-              ),
-            ),
-
             const Spacer(),
           ],
         ),
