@@ -1,16 +1,50 @@
-# food_haven
+# 🚀 DevOps for Flutter Food Ordering App (food_heaven)
 
-A new Flutter project.
+This project demonstrates the complete DevOps pipeline and deployment process for a Flutter-based food ordering web application named **food_heaven**.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 📌 Overview
 
-A few resources to get you started if this is your first Flutter project:
+A modern food ordering app built with Flutter Web, integrated with a full CI/CD pipeline using GitHub Actions. The application is containerized with Docker and deployed on **Amazon ECS (Fargate)** using **Amazon ECR Public Registry**.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🧰 Tech Stack
+
+| Category               | Tools/Services                         |
+|------------------------|----------------------------------------|
+| **Frontend**           | Flutter Web                            |
+| **CI/CD**              | GitHub Actions                         |
+| **Containerization**   | Docker                                 |
+| **Image Registry**     | Amazon ECR (Public)                    |
+| **Deployment**         | Amazon ECS (Fargate)                   |
+| **Secrets Management** | AWS Secrets Manager                    |
+
+---
+
+## ⚙️ CI/CD Workflow
+
+1. Push to `main` branch triggers the GitHub Actions workflow.
+2. Flutter web app is built using `flutter build web`.
+3. Docker image is built and pushed to Amazon ECR Public Registry.
+4. ECS (Fargate) is updated with the latest image for zero-downtime deployment.
+
+---
+
+## 🛠️ Repository Details
+
+- **Repository Name**: `food-heaven`
+- **Public ECR URI**: `public.ecr.aws/c0t2e3x3/food-heaven`
+- **Created**: June 24, 2025
+
+---
+
+## 📤 ECR Push Commands
+
+```bash
+aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/c0t2e3x3
+
+docker build -t food-heaven .
+docker tag food-heaven:latest public.ecr.aws/c0t2e3x3/food-heaven:latest
+docker push public.ecr.aws/c0t2e3x3/food-heaven:latest
